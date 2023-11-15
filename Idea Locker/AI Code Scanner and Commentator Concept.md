@@ -39,4 +39,4 @@ AI tool for code scanning and automated commenting, inspired by malware analysis
    - Incorporates advanced threat modeling techniques to identify potential attack vectors and security weaknesses.
 
 ## Disclaimer
-This is a conceptual idea for an AI Code Scanner and Commentator. It's not an implemented tool but explores the potential for revolutionizing code review processes and enhancing code security. Feel free to add or modify components based on personal preferences and requirements.
+This is a conceptual idea for an AI Code Scanner and Commentator. It's not an implemented tool.
