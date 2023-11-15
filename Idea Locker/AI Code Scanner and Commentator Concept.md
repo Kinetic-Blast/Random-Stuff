@@ -30,7 +30,7 @@ AI tool for code scanning and automated commenting, inspired by malware analysis
 
 ## Future Roadmap
 1. **Language Support:**
-   - Expands language support to cover various programming languages.
+   - Expands language support to cover various languages.
 
 2. **Security Tool Integration:**
    - Collaborates with security-focused tools and platforms for comprehensive code security.
