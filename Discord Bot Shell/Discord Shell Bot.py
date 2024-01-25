@@ -23,8 +23,7 @@ shell = subprocess.Popen(
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
     text=True,
-    universal_newlines=True
-)
+    universal_newlines=True)
 
 # Create threads to read stdout and stderr
 stdout_thread = threading.Thread(target=read_output, args=(shell.stdout,))
@@ -45,7 +44,6 @@ async def on_message(message):
         global output
 
         command = message.content[1:]
-        print(command)
         
         # Send the command to the shell
         shell.stdin.write(command + "\n")
@@ -56,7 +54,6 @@ async def on_message(message):
         
         # Get the output from the shell and format it
         temp_output = " \n".join(output)
-        print(temp_output)
         
         # Send the formatted output back to the Discord channel
         await message.channel.send(f"```\n{temp_output}\n```")
