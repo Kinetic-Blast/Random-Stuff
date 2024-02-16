@@ -37,8 +37,8 @@ if platform.system() == "Windows":
         text=True,
         universal_newlines=True,
         bufsize=1,
-        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
-    )
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+    
 else:
     shell = subprocess.Popen(
         ["bash"],
@@ -46,8 +46,7 @@ else:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
-        universal_newlines=True
-    )
+        universal_newlines=True)
 
 stdout_thread = threading.Thread(target=read_output, args=(shell.stdout,))
 stderr_thread = threading.Thread(target=read_output, args=(shell.stderr,))
