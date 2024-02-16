@@ -37,8 +37,8 @@ if platform.system() == "Windows":
         text=True,
         universal_newlines=True,
         bufsize=1,
-        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
-    
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+    )
 else:
     shell = subprocess.Popen(
         ["bash"],
@@ -46,7 +46,8 @@ else:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
-        universal_newlines=True)
+        universal_newlines=True
+    )
 
 stdout_thread = threading.Thread(target=read_output, args=(shell.stdout,))
 stderr_thread = threading.Thread(target=read_output, args=(shell.stderr,))
@@ -61,11 +62,14 @@ async def on_message(message):
     if message.content.startswith('$'):
         global output
         command = message.content[1:]
-        shell.stdin.write(command + "\n")
-        shell.stdin.flush()
-        await asyncio.sleep(1)
-        temp_output = " \n".join(output)
-        await message.channel.send(f"```\n{temp_output}\n```")
-        output.clear()
+        if command == 'host':
+            await message.channel.send(f"The bot is currently running on {platform.system()}.")
+        else:
+            shell.stdin.write(command + "\n")
+            shell.stdin.flush()
+            await asyncio.sleep(1)
+            temp_output = " \n".join(output)
+            await message.channel.send(f"```\n{temp_output}\n```")
+            output.clear()
 
 client.run('YOUR_BOT_TOKEN')
