@@ -4,13 +4,17 @@ import threading
 import asyncio
 import importlib.util
 import sys
+import platform
 
 # Check if discord module is installed, if not, install it
 try:
     importlib.util.find_spec('discord')
 except ImportError:
     print("discord module not found. Installing...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "discord"])
+    if platform.system() == "Windows":
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "discord.py"])
+    else:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "discord"])
     importlib.reload(discord)
 
 intents = discord.Intents.default()
@@ -24,13 +28,26 @@ def read_output(pipe):
     for line in iter(pipe.readline, ""):
         output.append(line.strip())
 
-shell = subprocess.Popen(
-    ["bash"],
-    stdin=subprocess.PIPE,
-    stdout=subprocess.PIPE,
-    stderr=subprocess.PIPE,
-    text=True,
-    universal_newlines=True)
+if platform.system() == "Windows":
+    shell = subprocess.Popen(
+        ["cmd"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        universal_newlines=True,
+        bufsize=1,
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+    )
+else:
+    shell = subprocess.Popen(
+        ["bash"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        universal_newlines=True
+    )
 
 stdout_thread = threading.Thread(target=read_output, args=(shell.stdout,))
 stderr_thread = threading.Thread(target=read_output, args=(shell.stderr,))
