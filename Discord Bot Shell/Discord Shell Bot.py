@@ -6,17 +6,6 @@ import importlib.util
 import sys
 import platform
 
-# Check if discord module is installed, if not, install it
-try:
-    importlib.util.find_spec('discord')
-except ImportError:
-    print("discord module not found. Installing...")
-    if platform.system() == "Windows":
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "discord.py"])
-    else:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "discord"])
-    importlib.reload(discord)
-
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
