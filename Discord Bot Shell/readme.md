@@ -1,14 +1,15 @@
 # Discord Shell Bot
 
 ## Description
-This script is a Discord bot designed to create a live interaction between a Discord server and a Bash shell. It allows users to send Bash commands as messages starting with a "$" symbol, and the bot will execute these commands in a subprocessed Bash shell. The bot then captures the standard output and error streams of the shell and sends the results back to the Discord channel as formatted messages.
+This script serves as a Discord bot designed to facilitate live interaction between a Discord server and a Bash shell. Users can initiate commands in Bash or Command Prompt format by prefixing them with a "$" symbol within their messages. The bot then executes these commands within a subprocessed shell, capturing both standard output and error streams. Results are formatted and relayed back to the Discord channel as messages.
 
 ## Features
-- Listens for messages in a Discord server.
-- Executes Bash commands provided by users starting with "$".
-- Captures and formats the standard output and error from the Bash shell.
-- Sends the output back to the Discord channel for users to view.
-- Provides a live interaction with a Bash shell via Discord.
+- Monitors messages within a Discord server.
+- Executes Bash and Command Prompt commands initiated by users prefixed with "$".
+- Captures and formats standard output and errors from the shell.
+- Relays output back to the Discord channel for user viewing.
+- Facilitates live interaction with a Bash shell via Discord.
+- Compatible with both Windows and Linux environments.
 
 ## Usage
 1. Invite the bot to your Discord server.
