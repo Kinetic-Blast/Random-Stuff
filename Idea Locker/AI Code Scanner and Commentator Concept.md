@@ -1,42 +1,18 @@
-# AI Code Scanner and Commentator Concept
+# AI Code Scanner and Commentator — Concept
 
-## Vision
-AI tool for code scanning and automated commenting, inspired by malware analysis techniques.
+An idea for an AI-assisted code analysis tool inspired by malware analysis and reverse engineering.
 
-## Key Features
-1. **Deep Code Analysis:**
-   - Utilizes advanced static code analysis methods.
-   - Explores code structures, dependencies, and potential security vulnerabilities.
+The system would analyze existing code to understand what it does, how components interact, how data moves through it, and where potential security issues or suspicious behavior exist.
 
-2. **Automated Commenting:**
-   - Generates detailed comments to explain code functionality.
-   - Provides insights into malware code for better understanding.
+### Core Ideas
 
-3. **Security Focus:**
-   - Analyzes code to uncover potential security vulnerabilities.
-   - Integrates with security databases for real-time threat intelligence.
+* **Code Analysis:** Examine structure, dependencies, control flow, and data flow.
+* **AI Commentary:** Explain unfamiliar or complex code in plain language.
+* **Security Analysis:** Identify vulnerabilities, suspicious behavior, unsafe practices, and potential attack paths.
+* **Visual Analysis:** Generate call graphs, dependency maps, data-flow diagrams, and vulnerability heatmaps.
+* **Malware Analysis:** Help explain obfuscated or suspicious code and highlight areas for investigation.
+* **Threat Intelligence:** Optionally compare findings against vulnerability and security databases.
 
-## Implementation Ideas
-1. **Seamless Integration:**
-   - Integrates with popular Integrated Development Environments (IDEs).
-   - Provides real-time comments during code writing and reviewing.
+The initial goal would be to point the system at an unfamiliar codebase and have it produce a **map of what the code does, explain the important parts, and identify areas that deserve further investigation**.
 
-2. **Vulnerability Heatmaps:**
-   - Visualizes potential vulnerabilities within the codebase.
-   - Prioritizes critical areas needing immediate attention.
-
-3. **Continuous Learning:**
-   - Adapts and improves based on user feedback, evolving security standards, and emerging threats.
-
-## Future Roadmap
-1. **Language Support:**
-   - Expands language support to cover various languages.
-
-2. **Security Tool Integration:**
-   - Collaborates with security-focused tools and platforms for comprehensive code security.
-
-3. **Advanced Threat Modeling:**
-   - Incorporates advanced threat modeling techniques to identify potential attack vectors and security weaknesses.
-
-## Disclaimer
-This is a conceptual idea for an AI Code Scanner and Commentator. It's not an implemented tool.
+This is a conceptual idea, not an implemented product.
